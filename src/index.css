@@ -1,0 +1,22 @@
+html,
+body,
+div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+.colour-schemes > div {
+  margin-bottom: 20px;
+}
+
+.google-map-generator {
+  position: relative;
+}
+
+.google-map-generator.loading {
+  pointer-events: none;
+}
