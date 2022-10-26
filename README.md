@@ -1,4 +1,4 @@
-# Mileway Google Maps App
+# Google Maps App
 
 This project was bootstrapped with [Create Contentful App](https://github.com/contentful/create-contentful-app).
 
