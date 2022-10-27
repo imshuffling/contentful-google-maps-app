@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, {
   useState,
   useEffect,
@@ -46,12 +48,11 @@ const containerStyle = {
 const Map = (props: FieldProps) => {
   const { sdk, fieldValue, onAssetProcessed, onRemoveField } = props;
 
-  const mapSettingsField = useField<any>(sdk, "configuration");
-  const mapField = useField<any>(sdk, "googleMap");
-
-  // console.log("sdk", sdk);
-
-  // // const fieldValue = sdk.field.getValue();
+  const mapSettingsField = useField<any>(
+    sdk,
+    sdk.parameters.instance.configurationId || "configuration"
+  );
+  const mapField = useField<any>(sdk, sdk.field.id);
 
   const {
     google_maps_api_key,
@@ -248,12 +249,14 @@ const Map = (props: FieldProps) => {
   }, [mapSettingsField, sdk.entry.fields.configuration]);
 
   useEffect(() => {
-    sdk.space
-      .getAsset(mapField?.sys.id)
-      .then((data) => {
-        setAssetDetails(data);
-      })
-      .catch(alert);
+    if (mapField) {
+      sdk.space
+        .getAsset(mapField?.sys.id)
+        .then((data) => {
+          setAssetDetails(data);
+        })
+        .catch(alert);
+    }
   }, [sdk.space, fieldValue, mapField]);
 
   if (loadingCard && !assetDetails) {
