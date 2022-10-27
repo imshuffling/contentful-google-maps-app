@@ -74,8 +74,6 @@ const Map = (props: FieldProps) => {
     zoom: 20,
   });
 
-  console.log("inputFields", inputFields);
-
   const STATIC_GREY_THEME = googlemaps_theme_static;
   const GOOGLE_MAP = `https://maps.googleapis.com/maps/api/staticmap?center=${inputFields.coordinates.lat},${inputFields.coordinates.lng}%20%20&zoom=${inputFields.zoom}&size=640x350&scale=2&format=png32&maptype=roadmap&markers=icon:${inputFields.marker}|${inputFields.coordinates.lat},${inputFields.coordinates.lng}&key=${google_maps_api_key}${STATIC_GREY_THEME}`;
 
@@ -85,15 +83,6 @@ const Map = (props: FieldProps) => {
       setRecreate(true);
     }
   }, [mapRef.current, assetDetails]);
-
-  // const handleMarkerChange = (event: any) => {
-  //   const values = { ...inputFields };
-  //   values[event.target.name as any] = event.target.value;
-  //   setInputFields(values);
-  //   if (assetDetails) {
-  //     setRecreate(true);
-  //   }
-  // };
 
   const handleLat = (event: any) => {
     setInputFields((inputFields) => ({
@@ -130,9 +119,6 @@ const Map = (props: FieldProps) => {
       await mapSettings.getValue();
       await mapSettings.removeValue();
 
-      // const getTitle = sdk.entry.fields.administrativeTitle;
-      // const administrativeTitle = getTitle.getValue();
-
       const asset: any = await sdk.space.createAsset({
         fields: {
           title: {
@@ -160,8 +146,6 @@ const Map = (props: FieldProps) => {
         },
       });
 
-      console.log("setting inputFields mapSettings", inputFields);
-
       await mapSettings.getValue();
       await mapSettings.setValue(inputFields);
     }
@@ -171,9 +155,6 @@ const Map = (props: FieldProps) => {
       const mapSettings = sdk.entry.fields.configuration;
       await mapSettings.getValue();
       await mapSettings.removeValue();
-
-      // const getTitle = sdk.entry.fields.administrativeTitle;
-      // const administrativeTitle = getTitle.getValue();
 
       let asset: any = await props.sdk.space.getAsset(assetDetails.sys.id);
       asset.fields.file["en-US"] = {
@@ -261,22 +242,18 @@ const Map = (props: FieldProps) => {
   // }, [mapSettingsField, sdk.entry.fields.configuration]);
 
   useEffect(() => {
-    console.log(
-      "sdk.entry.fields.configuration.getValue()",
-      sdk.entry.fields.configuration.getValue()
-    );
-
     if (sdk.entry.fields.configuration.getValue() !== undefined) {
       setInputFields(mapSettingsField);
     }
   }, [mapSettingsField, sdk.entry.fields.configuration]);
 
   useEffect(() => {
-    if (typeof mapField?.sys !== "undefined") {
-      sdk.space.getAsset(mapField?.sys.id).then((data) => {
+    sdk.space
+      .getAsset(mapField?.sys.id)
+      .then((data) => {
         setAssetDetails(data);
-      });
-    }
+      })
+      .catch(alert);
   }, [sdk.space, fieldValue, mapField]);
 
   if (loadingCard && !assetDetails) {
