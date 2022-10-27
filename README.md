@@ -19,4 +19,5 @@ You will need to specifiy a static image URL for the marker, and the json files 
 
 Add the app on the media reference field, make sure the relevant fields have been created on the content model (`googleMap` and `configuration`).
 
-<img width="587" alt="image" src="https://user-images.githubusercontent.com/739061/198057597-de566282-660a-45e9-a333-7fb53a7d9561.png">
+![image](https://user-images.githubusercontent.com/739061/198306306-9edef410-1b9f-421e-9245-b0f18dafc7d2.png)
+
