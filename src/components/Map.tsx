@@ -21,6 +21,7 @@ import {
 } from "@contentful/forma-36-react-components";
 import { FieldExtensionSDK, EditorExtensionSDK } from "@contentful/app-sdk";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { v4 as uuidv4 } from "uuid";
 
 import { useField } from "../hooks/useField";
 
@@ -73,7 +74,6 @@ const Map = (props: FieldProps) => {
     marker:
       googlemaps_marker ||
       "https://developers.google.com/static/maps/documentation/javascript/images/default-marker.png",
-    zoom: 20,
   });
 
   const STATIC_GREY_THEME = googlemaps_theme_static;
@@ -81,6 +81,7 @@ const Map = (props: FieldProps) => {
 
   const zoomCallBack = useCallback(() => {
     handleZoomChanged();
+
     if (assetDetails) {
       setRecreate(true);
     }
@@ -121,15 +122,17 @@ const Map = (props: FieldProps) => {
       await mapSettings.getValue();
       await mapSettings.removeValue();
 
+      const assetTitle = `map_${uuidv4()}`;
+
       const asset: any = await sdk.space.createAsset({
         fields: {
           title: {
-            "en-US": `Map - image`,
+            "en-US": assetTitle,
           },
           file: {
             "en-US": {
               contentType: "image/png",
-              fileName: `map`,
+              fileName: assetTitle,
               upload: GOOGLE_MAP,
             },
           },
@@ -160,7 +163,7 @@ const Map = (props: FieldProps) => {
 
       let asset: any = await props.sdk.space.getAsset(assetDetails.sys.id);
       asset.fields.file["en-US"] = {
-        fileName: `Map_admintitle`,
+        fileName: `map_${assetDetails.sys.id}`,
         contentType: "image/png",
         upload: GOOGLE_MAP,
       };
@@ -230,7 +233,6 @@ const Map = (props: FieldProps) => {
       styles: JSON.parse(googlemaps_theme),
       coordinates: { lat: 51.501476, lng: -0.140634 },
       marker: googlemaps_marker,
-      zoom: 20,
     });
 
     setLoadingCard(false);
@@ -271,7 +273,7 @@ const Map = (props: FieldProps) => {
         }
         style={{ marginTop: "10px" }}
       >
-        <Grid columns={2} columnGap={"spacingM"}>
+        <Grid columns={3} columnGap={"spacingM"}>
           <GridItem>
             <TextField
               name="lat"
@@ -304,7 +306,7 @@ const Map = (props: FieldProps) => {
                 styles: JSON.parse(googlemaps_theme),
               }}
               center={inputFields.coordinates}
-              zoom={inputFields.zoom || 20}
+              zoom={inputFields.zoom ? inputFields.zoom : 20}
               ref={mapRef}
               onZoomChanged={zoomCallBack}
             >
