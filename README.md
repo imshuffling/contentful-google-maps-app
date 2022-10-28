@@ -9,13 +9,14 @@ In the content model you will need to configure 2 fields, with the ids of `googl
 
 <img width="1548" alt="image" src="https://user-images.githubusercontent.com/739061/198057099-778cb2e8-df7e-43d7-bd71-91909de98dff.png">
 
-#### App Configuration Screen
+### App Configuration Screen
 
 You will need to specifiy a static image URL for the marker, and the json files for the Google Map theme. Recommend using https://snazzymaps.com/ for this.
 
-<img width="1082" alt="Screenshot 2022-10-26 at 15 44 22" src="https://user-images.githubusercontent.com/739061/198058182-4369fbb4-35b1-4a2d-b409-ea3ea87731a8.png">
+![Screenshot 2022-10-28 at 11 31 04](https://user-images.githubusercontent.com/739061/198567365-2cfc84b4-92d0-4fda-9ddf-f9f976753678.png)
 
-#### App definition
+
+### App definition
 
 Add the app on the media reference field, make sure the relevant fields have been created on the content model (`googleMap` and `configuration`).
 
