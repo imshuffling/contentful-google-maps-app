@@ -1,7 +1,7 @@
 # Google Maps App
 POC App which allows the user to create a static google map image with a marker inside of Contentful.
 
-https://user-images.githubusercontent.com/739061/198059812-a204bd01-75dd-4df1-8fcc-f1a26573570a.mp4
+![Screen Recording 2022-10-28 at 11 15 13](https://user-images.githubusercontent.com/739061/198566005-d0b29baf-a761-4a1f-b581-c847be19bd23.gif)
 
 **Please note you will need a Google Maps V3 API key**
 
