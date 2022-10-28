@@ -78,14 +78,13 @@ const Config = (props: ConfigProps) => {
             This is the configuration settings for Google Maps App
           </Paragraph>
         </Typography>
-        <Grid columns={"500px 1fr"} className={css({ marginTop: "60px" })}>
+        <Grid columns={"1fr 1fr"} className={css({ marginTop: "60px" })}>
           <Form>
             <TextField
               name="google_maps_api_key"
               id="google_maps_api_key"
               labelText="Google Maps API v3 Key"
               textInputProps={{ placeholder: "Please enter a valid Key" }}
-              width="large"
               required
               value={parameters.google_maps_api_key}
               onChange={(event): void => {
@@ -106,7 +105,6 @@ const Config = (props: ConfigProps) => {
                 placeholder:
                   "Please provide an external image URL for the Marker Pin",
               }}
-              width="large"
               required
               value={parameters.googlemaps_marker}
               onChange={(event): void => {
@@ -122,16 +120,14 @@ const Config = (props: ConfigProps) => {
         </Grid>
         <Form>
           <Subheading>Map Theme</Subheading>
-          <Grid columns={3} className="colour-schemes">
+          <Grid columns={2} className="colour-schemes">
             <div>
               <TextField
                 name="googlemaps_theme"
                 id="googlemaps_theme"
                 labelText="Theme"
-                width="large"
                 helpText="Please enter valid JSON string for the google map skin"
                 required
-                rows={5}
                 textarea
                 value={parameters.googlemaps_theme}
                 onChange={(event): void => {
@@ -149,10 +145,8 @@ const Config = (props: ConfigProps) => {
                 name="googlemaps_theme_static"
                 id="googlemaps_theme_static"
                 labelText="Static Theme"
-                width="large"
                 helpText="This is the static map theme options"
                 required
-                rows={5}
                 textarea
                 value={parameters.googlemaps_theme_static}
                 onChange={(event): void => {

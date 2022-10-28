@@ -25,7 +25,6 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useField } from "../hooks/useField";
 
 interface FieldProps {
-  //   sdk: FieldExtensionSDK;
   sdk: FieldExtensionSDK | EditorExtensionSDK;
   fieldValue: any;
   onAssetProcessed: (asset: any) => void;
@@ -71,7 +70,9 @@ const Map = (props: FieldProps) => {
   const [inputFields, setInputFields] = useState<InputFields>({
     styles: JSON.parse(googlemaps_theme),
     coordinates: { lat: 51.501476, lng: -0.140634 },
-    marker: googlemaps_marker,
+    marker:
+      googlemaps_marker ||
+      "https://developers.google.com/static/maps/documentation/javascript/images/default-marker.png",
     zoom: 20,
   });
 
@@ -231,16 +232,9 @@ const Map = (props: FieldProps) => {
       marker: googlemaps_marker,
       zoom: 20,
     });
-    // setLoading(false);
+
     setLoadingCard(false);
   };
-
-  // useEffect(() => {
-  //   if (typeof mapSettingsField !== "undefined") {
-  //     // sdk.entry.fields.configuration.getValue();
-  //     setInputFields(sdk.entry.fields.configuration.getValue());
-  //   }
-  // }, [mapSettingsField, sdk.entry.fields.configuration]);
 
   useEffect(() => {
     if (sdk.entry.fields.configuration.getValue() !== undefined) {
@@ -275,6 +269,7 @@ const Map = (props: FieldProps) => {
         className={
           loading ? "google-map-generator loading" : "google-map-generator"
         }
+        style={{ marginTop: "10px" }}
       >
         <Grid columns={2} columnGap={"spacingM"}>
           <GridItem>
@@ -283,7 +278,6 @@ const Map = (props: FieldProps) => {
               id="lat"
               value={`${Number(inputFields.coordinates.lat)}`}
               labelText="Lat"
-              width="medium"
               textInputProps={{ placeholder: "Lat", type: "number" }}
               onChange={(event) => handleLat(event)}
             />
@@ -292,7 +286,6 @@ const Map = (props: FieldProps) => {
             <TextField
               name="lng"
               id="lng"
-              width="medium"
               value={`${Number(inputFields.coordinates.lng)}`}
               labelText="Lng"
               textInputProps={{ placeholder: "Lng", type: "number" }}
