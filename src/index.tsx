@@ -1,31 +1,29 @@
-import React from 'react';
-import { render } from 'react-dom';
+import React from "react";
+import { render } from "react-dom";
 
 import {
   AppExtensionSDK,
   FieldExtensionSDK,
   init,
-  DialogExtensionSDK,
   locations,
-} from '@contentful/app-sdk';
-import '@contentful/forma-36-react-components/dist/styles.css';
-import '@contentful/forma-36-fcss/dist/styles.css';
-import '@contentful/forma-36-tokens/dist/css/index.css';
-import './index.css';
+} from "@contentful/app-sdk";
+import "@contentful/forma-36-react-components/dist/styles.css";
+import "@contentful/forma-36-fcss/dist/styles.css";
+import "@contentful/forma-36-tokens/dist/css/index.css";
+import "./index.css";
 
-import Config from './components/ConfigScreen';
-import Field from './components/Field';
-import Dialog from './components/Dialog';
+import Config from "./components/ConfigScreen";
+import Field from "./components/Field";
 
-import LocalhostWarning from './components/LocalhostWarning';
+import LocalhostWarning from "./components/LocalhostWarning";
 
-if (process.env.NODE_ENV === 'development' && window.self === window.top) {
+if (process.env.NODE_ENV === "development" && window.self === window.top) {
   // You can remove this if block before deploying your app
-  const root = document.getElementById('root');
+  const root = document.getElementById("root");
   render(<LocalhostWarning />, root);
 } else {
   init((sdk) => {
-    const root = document.getElementById('root');
+    const root = document.getElementById("root");
 
     // All possible locations for your app
     // Feel free to remove unused locations
@@ -38,10 +36,6 @@ if (process.env.NODE_ENV === 'development' && window.self === window.top) {
       {
         location: locations.LOCATION_ENTRY_FIELD,
         component: <Field sdk={sdk as FieldExtensionSDK} />,
-      },
-      {
-        location: locations.LOCATION_DIALOG,
-        component: <Dialog sdk={sdk as DialogExtensionSDK} />,
       },
     ];
 
